@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpXsrfTokenExtractor } from '@angular/common/http';
 import { Member } from '../model/member';
 import { map, of } from 'rxjs';
 
@@ -37,5 +37,9 @@ export class MembersService {
         this.members[index] = {...this.members[index], ...member}
       })
     );
+  }
+
+  setMainPhoto(photoId: number){
+    return this.http.put(this.baseUrl +'users/set-main-photo/' + photoId, {});
   }
 }
