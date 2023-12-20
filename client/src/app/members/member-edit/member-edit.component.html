@@ -75,8 +75,7 @@
             <li ngbNavItem [ngbNavItem]="2">
                 <button ngbNavLink>Edit Photos</button>
                 <ng-template ngbNavContent *ngIf="nav.activeId == 2">
-                    <!-- <gallery [items]="images" class="gallery"></gallery> -->
-                    <p>Photo edit wiil go here</p>
+                    <app-photo-editor [member]="member"></app-photo-editor>
                 </ng-template>
             </li>
         </ul>

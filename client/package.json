@@ -25,6 +25,7 @@
     "bootstrap": "^5.3.2",
     "bootswatch": "^5.3.2",
     "ng-gallery": "^11.0.0",
+    "ng2-file-upload": "^5.0.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^18.0.0",
@@ -52,5 +53,11 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
+  },
+  "overrides": {
+    "ng2-file-upload": {
+      "@angular/common": "17.0.4",
+      "@angular/core": "17.0.4"
+    }
   }
 }
