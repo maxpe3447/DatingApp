@@ -6,7 +6,9 @@
                     [disabled]="photo.isMain"
                     (click)="setMainPhoto(photo)"
                     [ngClass]="photo.isMain ? 'btn-success active': 'btn-outline-success'">Main</button>
-            <button class="btn btn-sm btn-danger">
+            <button class="btn btn-sm btn-danger"
+                    [disabled]="photo.isMain"
+                    (click)="deletePhoto(photo.id)">
                 <i class="bi bi-trash"></i>
             </button>
         </div>

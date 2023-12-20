@@ -11,11 +11,11 @@ export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getMembers(){
-    if(this.members.length > 0) return of(this.members);
-    return this.http.get<Member[]>(this.baseUrl+'users').pipe(
+  getMembers() {
+    if (this.members.length > 0) return of(this.members);
+    return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
       map(members => {
         this.members = members;
         return this.members;
@@ -23,23 +23,27 @@ export class MembersService {
     );
   }
 
-  getMember(userName: string){
-    const member = this.members.find(x=>x.userName ===userName);
-    if(member) return of(member);
+  getMember(userName: string) {
+    const member = this.members.find(x => x.userName === userName);
+    if (member) return of(member);
 
-    return this.http.get<Member>(this.baseUrl +"users/"+userName);
+    return this.http.get<Member>(this.baseUrl + "users/" + userName);
   }
 
-  updateMember(member: Member){
-    return this.http.put(this.baseUrl+"users", member).pipe(
-      map(()=>{
+  updateMember(member: Member) {
+    return this.http.put(this.baseUrl + "users", member).pipe(
+      map(() => {
         const index = this.members.indexOf(member);
-        this.members[index] = {...this.members[index], ...member}
+        this.members[index] = { ...this.members[index], ...member }
       })
     );
   }
 
-  setMainPhoto(photoId: number){
-    return this.http.put(this.baseUrl +'users/set-main-photo/' + photoId, {});
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
 }

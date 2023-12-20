@@ -162,7 +162,7 @@ namespace DatingApp.Controllers
 
             if(await _userRepository.SaveAllAsync())
             {
-                Ok();
+                return Ok();
             }
 
             return BadRequest("Problem deleting photo");
