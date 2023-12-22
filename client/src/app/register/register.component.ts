@@ -4,18 +4,20 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Reac
 import { AccountService } from '../services/account.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TextInputComponent } from "../_forms/text-input/text-input.component";
+import { DatePickerComponent } from "../_forms/date-picker/date-picker.component";
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
-  imports: [CommonModule, FormsModule, ToastrModule, ReactiveFormsModule, TextInputComponent]
+    selector: 'app-register',
+    standalone: true,
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css',
+    imports: [CommonModule, FormsModule, ToastrModule, ReactiveFormsModule, TextInputComponent, DatePickerComponent]
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   model: any = {};
   registerForm: FormGroup = new FormGroup({});
+  maxDate: Date = new Date();
   constructor(private accountService: AccountService,
     private toastr: ToastrService,
     private fb: FormBuilder) {
@@ -23,6 +25,7 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initializeFotm();
+    this.maxDate.setFullYear(this.maxDate.getFullYear()-18);
   }
 
   initializeFotm() {

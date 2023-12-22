@@ -16,8 +16,11 @@
         [label]="'Username'" />
         <app-text-input [formControl]="$any(registerForm.controls['knownAs'])" 
         [label]="'Known As'" />
-        <app-text-input [formControl]="$any(registerForm.controls['dateOfBirth'])" 
-        [label]="'Date of Birth'" ngbDatepicker />
+        <!-- <app-text-input [formControl]="$any(registerForm.controls['dateOfBirth'])" 
+        [label]="'Date of Birth'"/> -->
+        <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])" 
+        [label]="'Date of Birth'"
+        [maxDate]="maxDate"/>
         <app-text-input [formControl]="$any(registerForm.controls['city'])" 
         [label]="'City'" />
         <app-text-input [formControl]="$any(registerForm.controls['country'])" 

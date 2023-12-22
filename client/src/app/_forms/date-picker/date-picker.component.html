@@ -1,0 +1,27 @@
+<!-- <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"
+    [class.is-invalid]="control.touched && control.invalid" class="form-controll" [formControl]="control" pla /> -->
+
+<div class="mb-3">
+    <div class="row row-cols-sm-auto">
+        <div class="col-12">
+            <div class="input-group">
+                <input class="form-control" placeholder="{{label}}" name="dp" ngbDatepicker #d="ngbDatepicker"
+                    [class.is-invalid]="control.touched && control.invalid"
+                    [formControl]="control" 
+                    />
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="control.errors?.['required']" class="invalid-feedback">
+        {{label}} is required
+    </div>
+</div>
+<!-- <input
+				class="form-control"
+				placeholder="yyyy-mm-dd"
+				name="dp"
+				[(ngModel)]="model"
+				ngbDatepicker
+				#d="ngbDatepicker"
+			/> -->
