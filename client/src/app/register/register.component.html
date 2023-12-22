@@ -1,37 +1,34 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
+
     <div class="mb-3">
-        <input type="text"
-            [class.is-invalid]="registerForm.get('username')?.errors && registerForm.get('username')?.touched"
-            class="form-control" formControlName="username" placeholder="Username">
-        <div class="invalid-feedback">Please enter a username</div>
+        <label style="margin-right:10px">I am a:</label>
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" value="male" formControlName="gender"> Male
+        </label>
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input ms-3" value="female" formControlName="gender"> Female
+        </label>
     </div>
-    <div class="mb-3">
-        <input type="password"
-            [class.is-invalid]="registerForm.get('password')?.errors && registerForm.get('password')?.touched"
-            class="form-control" formControlName="password" placeholder="Password">
-            <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required')">
-                Please enter a password
-            </div>
-            <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlenght')">
-                Please must be at least 4 characters
-            </div>
-            <div class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('maxlength')">
-                Please must be at 8 characters
-            </div>
-    </div>
-    <div class="mb-3">
-        <input type="password" class="form-control"
-            [class.is-invalid]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched"
-            formControlName="confirmPassword" placeholder="Confirm Password">
-            <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
-                Please enter confirmation password
-            </div>
-            <div class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('notMatching')">
-                Confirm password must match password
-            </div>
-    </div>
+
+    <app-text-input [formControl]="$any(registerForm.controls['username'])" 
+        [label]="'Username'" />
+        <app-text-input [formControl]="$any(registerForm.controls['knownAs'])" 
+        [label]="'Known As'" />
+        <app-text-input [formControl]="$any(registerForm.controls['dateOfBirth'])" 
+        [label]="'Date of Birth'" ngbDatepicker />
+        <app-text-input [formControl]="$any(registerForm.controls['city'])" 
+        [label]="'City'" />
+        <app-text-input [formControl]="$any(registerForm.controls['country'])" 
+        [label]="'Country'" />
+    <app-text-input [formControl]="$any(registerForm.controls['password'])" 
+        [label]="'Password'" 
+        [type]="'password'" />
+    <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" 
+        [label]="'Confirm Password'"
+        [type]="'password'" />
+
     <div class="text-center">
         <button class="btn btn-success me-2" type="submit">Register</button>
         <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>

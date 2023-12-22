@@ -1,6 +1,6 @@
 <div class="mb-3">
     <input 
-        type="type"
+        type="{{type}}"
         [class.is-invalid]="control.touched && control.invalid"
         class="form-control" 
         [formControl]="control" 
@@ -14,7 +14,7 @@
         <div class="invalid-feedback" *ngIf="control.errors?.['maxlength']">
             {{label}} must be at most {{control.errors?.['maxlength'].requiredLength}} characters
         </div>
-        <div class="invalid-feedback" *ngIf="control.errors?.['required']">
-            Please enter a {{label}}
+        <div class="invalid-feedback" *ngIf="control.errors?.['notMatching']">
+            Password fo not match
         </div>
 </div>
