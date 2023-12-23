@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+<form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
 
@@ -14,8 +14,6 @@
 
     <app-text-input [formControl]="$any(registerForm.controls['username'])" [label]="'Username'" />
     <app-text-input [formControl]="$any(registerForm.controls['knownAs'])" [label]="'Known As'" />
-    <!-- <app-text-input [formControl]="$any(registerForm.controls['dateOfBirth'])" 
-        [label]="'Date of Birth'"/> -->
     <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])" [label]="'Date of Birth'"
         [maxDate]="maxDate" />
     <app-text-input [formControl]="$any(registerForm.controls['city'])" [label]="'City'" />
@@ -25,7 +23,7 @@
         [type]="'password'" />
 
     <div class="row" *ngIf="validationErrors">
-        <ul>
+        <ul class="text-danger">
             <li *ngFor="let error of validationErrors">
                 {{error}}
             </li>
@@ -33,9 +31,7 @@
     </div>
 
     <div class="text-center">
-        <button class="btn btn-success me-2" type="submit">Register</button>
+        <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Register</button>
         <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
     </div>
 </form>
-<p>Form value: {{registerForm.value|json}}</p>
-<p>Form status: {{registerForm.status|json}}</p>
