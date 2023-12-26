@@ -3,3 +3,9 @@
         <app-member-card [member]="member"></app-member-card>
     </div>
 </div>
+<div class="d-flex justify-content-center">
+    <ngb-pagination [collectionSize]="((pagination?.totalItems??1*10)+10)" 
+                    [(page)]="pageNumber" 
+                    aria-label="Default pagination"
+                    (pageChange)="pageChange($event)"/>
+</div>
