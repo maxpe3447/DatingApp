@@ -17,7 +17,7 @@ import { Router, RouterModule } from '@angular/router';
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup = new FormGroup({});
-  maxDate: Date = new Date();
+  maxDate: Date | undefined;
   validationErrors: string[] | undefined;
   constructor(private accountService: AccountService,
     private toastr: ToastrService,
@@ -27,7 +27,8 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initializeFotm();
-    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);    
   }
 
   initializeFotm() {

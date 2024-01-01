@@ -39,8 +39,6 @@ export class DatePickerComponent implements ControlValueAccessor, OnInit {
   constructor(@Self() public ngControl: NgControl,
     private config: NgbDatepickerConfig) {
     this.ngControl.valueAccessor = this;
-   
-    console.log(this.config);
   }
   ngOnInit(): void {
 
@@ -48,8 +46,8 @@ export class DatePickerComponent implements ControlValueAccessor, OnInit {
       return;
     }
     this.config.maxDate = {
-      day: this.maxDate.getDay(),
-      month: this.maxDate.getMonth(),
+      day: this.maxDate.getDay()+1,
+      month: this.maxDate.getMonth()+1,
       year: this.maxDate.getFullYear()
     };
   }
