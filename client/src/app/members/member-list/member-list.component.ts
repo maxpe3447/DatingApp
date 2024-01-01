@@ -44,8 +44,21 @@ export class MemberListComponent implements OnInit {
   ngOnInit(): void {
     this.loadMembers();
   }
+  orderByLastActive(){
+    if(!this.userParams) return;
 
+    this.userParams.orderBy = 'lastActive';
+    this.loadMembers();
+  }
+  orderByCreated(){
+    if(!this.userParams) return;
+
+    this.userParams.orderBy = 'created';
+    this.loadMembers();
+  }
   loadMembers() {
+    console.log(this.userParams?.orderBy);
+    
     if(!this.userParams) return;
     this.memberService.getMembers(this.userParams).subscribe({
       next: response => {

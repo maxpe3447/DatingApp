@@ -21,13 +21,12 @@ export class MembersService {
     params = params.append('minAge',userParams.minAge );
     params = params.append('maxAge',userParams.maxAge );
     params = params.append('gender',userParams.gender );
+    params = params.append('orderBy',userParams.orderBy );
 
     return this.getPaginationResult<Member[]>(this.baseUrl + 'users', params);
   }
 
-  private getPaginationResult<T>(url:string, params: HttpParams) {
-    console.log(params);
-    
+  private getPaginationResult<T>(url:string, params: HttpParams) {   
     const paginatedResult:PaginatedResult<T> = new PaginatedResult<T>;
     return this.http.get<T>(url, { observe: 'response', params }).pipe(
       map(response => {
