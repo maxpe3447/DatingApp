@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.FileIO;
 using System.Security.Claims;
 
 namespace DatingApp.Controllers
@@ -33,6 +34,15 @@ namespace DatingApp.Controllers
         [HttpGet]
         public async Task<ActionResult<PageList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
+
+            var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            userParams.CurrentUsername = currentUser.UserName;
+
+            if (string.IsNullOrEmpty(currentUser.Gender))
+            {
+                userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
+            }
+
             var users = await _userRepository.GetMemberAsync(userParams);
 
             Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, 

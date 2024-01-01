@@ -25,9 +25,19 @@ public class UserRepository : IUserRepository
 
     public async Task<PageList<MemberDto>> GetMemberAsync(UserParams userParams)
     {
-        var query = _context.Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                                  .AsNoTracking();
-        return await PageList<MemberDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+        var query = _context.Users.AsQueryable();
+        query = query.Where(u=>u.UserName != userParams.CurrentUsername);
+        query = query.Where(u=>u.Gender == userParams.Gender);
+
+        var minDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge - 1));
+        var maxDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge - 1));
+
+        query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+
+        return await PageList<MemberDto>.CreateAsync(
+            query.AsNoTracking().ProjectTo<MemberDto>(_mapper.ConfigurationProvider),
+            userParams.PageNumber, 
+            userParams.PageSize);
     }
 
     public async Task<MemberDto> GetMemberAsync(string username)
