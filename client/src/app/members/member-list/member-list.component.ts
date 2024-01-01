@@ -21,67 +21,56 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class MemberListComponent implements OnInit {
   members: Member[] = [];
   pagination: Pagination | undefined;
-  // pageNumber = 1;
   userParams: UserParams | undefined;
-  user: User | undefined;
   genderList = [
-    {value:'male', display: 'Males'},
-    {value: 'female', display:'Females'
-  }            ]
-  constructor(
-    private memberService: MembersService, 
-    private accountService:AccountService) {
-      this.accountService.currentUser$.pipe(take(1)).subscribe({
-        next: user => {
-          if(user){
-            this.userParams = new UserParams(user);
-            this.user= user;
-          }
-        }
-      });
-   }
+    { value: 'male', display: 'Males' },
+    {
+      value: 'female', display: 'Females'
+    }]
+  constructor(private memberService: MembersService) {
+    this.userParams = memberService.getUserParams();
+  }
 
   ngOnInit(): void {
     this.loadMembers();
   }
-  orderByLastActive(){
-    if(!this.userParams) return;
+  orderByLastActive() {
+    if (!this.userParams) return;
 
     this.userParams.orderBy = 'lastActive';
     this.loadMembers();
   }
-  orderByCreated(){
-    if(!this.userParams) return;
+  orderByCreated() {
+    if (!this.userParams) return;
 
     this.userParams.orderBy = 'created';
     this.loadMembers();
   }
   loadMembers() {
-    console.log(this.userParams?.orderBy);
-    
-    if(!this.userParams) return;
-    this.memberService.getMembers(this.userParams).subscribe({
-      next: response => {
-        if (response.result && response.pagination) {
-          this.members = response.result;
-          this.pagination = response.pagination;
-          console.log(this.members );
-          
-        }
-      }
-    });
-  }
+    console.log(this.userParams);
 
-  resetFilter(){
-    if(this.user){
-      this.userParams = new UserParams(this.user);
-      this.loadMembers();
+    if (this.userParams) {
+      this.memberService.setUserParams(this.userParams);
+      this.memberService.getMembers(this.userParams).subscribe({
+        next: response => {
+          if (response.result && response.pagination) {
+            this.members = response.result;
+            this.pagination = response.pagination;
+          }
+        }
+      });
     }
   }
 
-  pageChange(page: any) {          
+  resetFilter() {
+    this.userParams = this.memberService.resetUserParams();
+    this.loadMembers();
+  }
+
+  pageChange(page: any) {
     if (this.userParams && this.userParams?.pageNumber !== page) {
-      this.userParams.pageNumber = page;     
+      this.userParams.pageNumber = page;
+      this.memberService.setUserParams(this.userParams);
       this.loadMembers();
     }
   }

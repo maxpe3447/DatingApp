@@ -4,18 +4,20 @@ import { Member } from '../../model/member';
 import { MembersService } from '../../services/members.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { GALLERY_CONFIG, GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
+import {GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
+import { TimeagoFormatter, TimeagoModule, TimeagoPipe } from 'ngx-timeago';
 @Component({
   selector: 'app-member-detail',
   standalone: true,
-  imports: [CommonModule, NgbNavModule, GalleryModule],
+  imports: [CommonModule, NgbNavModule, GalleryModule, TimeagoModule],
   templateUrl: './member-detail.component.html',
   styleUrl: './member-detail.component.css'
 })
 export class MemberDetailComponent implements OnInit {
   member: Member | undefined;
   images: GalleryItem[] = [];
-  constructor(private memberService: MembersService,
+  constructor(
+    private memberService: MembersService,
     private route: ActivatedRoute) {
 
   }

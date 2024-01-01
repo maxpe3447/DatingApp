@@ -21,6 +21,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     noopInterceptorProvider,
     [provideHttpClient(withInterceptors([JwtInterceptor]))],
-    [provideHttpClient(withInterceptors([loadingInterceptor]))],
+    [provideHttpClient(withInterceptors([loadingInterceptor]))]
   ]
 };

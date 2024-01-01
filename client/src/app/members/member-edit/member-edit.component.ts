@@ -10,13 +10,14 @@ import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { FormsModule, NgForm, } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
+import { TimeagoModule } from 'ngx-timeago';
 
 @Component({
     selector: 'app-member-edit',
     standalone: true,
     templateUrl: './member-edit.component.html',
     styleUrl: './member-edit.component.css',
-    imports: [CommonModule, NgbNavModule, GalleryModule, FormsModule, PhotoEditorComponent]
+    imports: [CommonModule, NgbNavModule, GalleryModule, FormsModule, PhotoEditorComponent, TimeagoModule]
 })
 export class MemberEditComponent implements OnInit, AfterContentChecked {
   @ViewChild('editForm') editForm: NgForm | undefined

@@ -6,6 +6,7 @@ import { NavComponent } from '../nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterOutlet } from '@angular/router';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TimeagoModule } from 'ngx-timeago';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       NavComponent, 
       HomeComponent, 
       ToastrModule,
-      NgxSpinnerModule
+      NgxSpinnerModule,
+      TimeagoModule.forRoot()
   ],
   exports:[
     CommonModule, 
@@ -26,7 +28,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       NavComponent, 
       HomeComponent, 
       ToastrModule,
-      NgxSpinnerModule
+      NgxSpinnerModule,
+      TimeagoModule
   ],
 })
 export class SharedModule { }
