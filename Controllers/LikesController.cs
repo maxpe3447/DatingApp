@@ -1,6 +1,7 @@
 ﻿using DatingApp.DTOs;
 using DatingApp.Entities;
 using DatingApp.Extensions;
+using DatingApp.Helpers;
 using DatingApp.Services.LikeRepository;
 using DatingApp.Services.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -51,9 +52,12 @@ namespace DatingApp.Controllers
             return BadRequest("Failed to like user");
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes(string predicate)
+        public async Task<ActionResult<PageList<LikeDto>>> GetUserLikes([FromQuery]LikesParams likesParams)
         {
-            var users = await _likeRepository.GetUserLikes(predicate, User.GetUserId());
+            likesParams.UserId = User.GetUserId();
+            var users = await _likeRepository.GetUserLikes(likesParams);
+
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPage));
 
             return Ok(users);
         }
