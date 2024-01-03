@@ -24,7 +24,6 @@ export class NavComponent implements OnInit{
               private toastr: ToastrService){ }
 
   login(){
-    // debugger;
     this.accoutnService.login(this.model).subscribe({
       next: _ => this.router.navigateByUrl('/members')
     });

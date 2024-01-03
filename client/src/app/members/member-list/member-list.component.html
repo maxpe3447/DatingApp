@@ -6,38 +6,36 @@
         <div class="d-flex mx-2">
             <label class="col-form-label">Age from: </label>
             <input type="number" class="form-control ms-1" style="width: 70px" name="minAge"
-             [(ngModel)]="userParams.minAge">
+                [(ngModel)]="userParams.minAge">
         </div>
         <div class="d-flex mx-2">
             <label class="col-form-label">Age to: </label>
             <input type="number" class="form-control ms-1" style="width: 70px" name="maxAge"
-             [(ngModel)]="userParams.maxAge">
+                [(ngModel)]="userParams.maxAge">
         </div>
         <div class="d-flex px-2">
             <label class="col-form-label me-2">Show: </label>
-            <select name="gender" style="width: 130px;" class="form-select ms-1"
-            [(ngModel)]="userParams.gender">
-        <option *ngFor="let gender of genderList" [value]="gender.value">
-            {{gender.display}}</option>
-        </select>
+            <select name="gender" style="width: 130px;" class="form-select ms-1" [(ngModel)]="userParams.gender">
+                <option *ngFor="let gender of genderList" [value]="gender.value">
+                    {{gender.display}}</option>
+            </select>
         </div>
         <button class="btn btn-primary ms-1" type="submit">
             Apply Filter
         </button>
-        <button class="btn btn-primary ms-1" type="submit" (click)="resetFilter()">
+        <button class="btn btn-info ms-1" type="submit" (click)="resetFilter()">
             Reset filter
         </button>
-        
+
         <div class="col">
             <div class="btn-group float-end">
-                <button 
-                    type="button"
-                    class="btn btn-primary" 
-                    (click)="orderByLastActive()">Last Active</button>
-                <button 
-                    type="button"
-                    class="btn btn-primary" 
-                    (click)="orderByCreated()">Newest members</button>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked
+                    (click)="orderByLastActive()">
+                <label class="btn btn-outline-primary" for="btnradio1">Last Active</label>
+
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off"
+                    (click)="orderByCreated()">
+                <label class="btn btn-outline-primary" for="btnradio3">Newest members</label>
             </div>
         </div>
     </form>
@@ -49,8 +47,7 @@
     </div>
 </div>
 <div class="d-flex justify-content-center">
-    <ngb-pagination [collectionSize]="((pagination?.totalItems??1*10)+10)" 
-    aria-label="Default pagination"
-    (pageChange)="pageChange($event)"/>
+    <ngb-pagination [collectionSize]="((pagination?.totalItems??1*10)+10)" aria-label="Default pagination"
+        (pageChange)="pageChange($event)" />
     <!-- [(page)]="pageNumber"  -->
 </div>
