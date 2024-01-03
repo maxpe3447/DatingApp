@@ -7,6 +7,7 @@ import { PaginatedResult } from '../model/pagination';
 import { UserParams } from '../model/userParams';
 import { AccountService } from './account.service';
 import { User } from '../model/User';
+import { PreloadingStrategy } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -104,8 +105,12 @@ export class MembersService {
     return this.http.post(this.baseUrl+"likes/"+username,{});
   }
 
-  getLikes(predicate: string){
-    return this.http.get<Member[]>(this.baseUrl+'likes?predicate='+predicate);
+  getLikes(predicate: string, pageNumber:number, pageSize: number){
+
+    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate',predicate);
+
+    return this.getPaginationResult<Member[]>(this.baseUrl + 'likes', params)
   }
 
   private getPaginationResult<T>(url: string, params: HttpParams) {

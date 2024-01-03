@@ -47,7 +47,6 @@
     </div>
 </div>
 <div class="d-flex justify-content-center">
-    <ngb-pagination [collectionSize]="((pagination?.totalItems??1*10)+10)" aria-label="Default pagination"
+    <ngb-pagination [collectionSize]="((pagination?.totalPages??1)*10)" aria-label="Default pagination"
         (pageChange)="pageChange($event)" />
-    <!-- [(page)]="pageNumber"  -->
 </div>
