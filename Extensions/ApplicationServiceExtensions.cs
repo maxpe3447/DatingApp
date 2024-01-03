@@ -1,5 +1,6 @@
 ﻿using DatingApp.Data;
 using DatingApp.Helpers;
+using DatingApp.Services.LikeRepository;
 using DatingApp.Services.PhotoService;
 using DatingApp.Services.Repository;
 using DatingApp.Services.TokenService;
@@ -24,6 +25,7 @@ namespace DatingApp.Extensions
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
+            services.AddScoped<ILikeRepository, LikeRepository>();
             return services;
         }
     }
