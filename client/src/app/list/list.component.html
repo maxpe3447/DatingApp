@@ -1,1 +1,21 @@
-<p>list works!</p>
+<div class="text-center mt-3">
+    <h2>{{predicate === 'loked' ? 'Members I like' : 'Members who like me'}}</h2>
+</div>
+
+<div class="container mt-3">
+    <div class="btn-group" role="group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked
+            (click)="likedClick()">
+        <label class="btn btn-outline-primary" for="btnradio1">Member I Like</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off"
+            (click)="likedByClick()">
+        <label class="btn btn-outline-primary" for="btnradio3">Member who like me</label>
+
+    </div>
+    <div class="row mt-3">
+        <div class="col-2" *ngFor="let member of members">
+            <app-member-card [member]="member"></app-member-card>
+        </div>
+    </div>
+</div>
