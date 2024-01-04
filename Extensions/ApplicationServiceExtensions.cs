@@ -3,6 +3,7 @@ using DatingApp.Helpers;
 using DatingApp.Services.LikeRepository;
 using DatingApp.Services.PhotoService;
 using DatingApp.Services.Repository;
+using DatingApp.Services.RepositoryService;
 using DatingApp.Services.TokenService;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,7 @@ namespace DatingApp.Extensions
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
             return services;
         }
     }
