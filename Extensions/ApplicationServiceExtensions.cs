@@ -5,7 +5,11 @@ using DatingApp.Services.PhotoService;
 using DatingApp.Services.Repository;
 using DatingApp.Services.RepositoryService;
 using DatingApp.Services.TokenService;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DatingApp.Extensions
 {
