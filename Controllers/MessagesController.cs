@@ -32,7 +32,7 @@ namespace DatingApp.Controllers
         {
             var username = User.GetUsername();
 
-            if(username == messageDto.RecipientUsername.ToLower())
+            if (username == messageDto.RecipientUsername.ToLower())
             {
                 return BadRequest("You can not send messages to yourself");
             }
@@ -40,7 +40,7 @@ namespace DatingApp.Controllers
             var sender = await _userRepository.GetUserByUsernameAsync(username);
             var recipient = await _userRepository.GetUserByUsernameAsync(messageDto.RecipientUsername);
 
-            if(recipient == null)
+            if (recipient == null)
             {
                 return NotFound();
             }
@@ -55,16 +55,16 @@ namespace DatingApp.Controllers
 
             _messageRepository.AddMessage(message);
 
-            if(await _messageRepository.SaveAllAsync())
+            if (await _messageRepository.SaveAllAsync())
             {
                 return Ok(_mapper.Map<MessageDto>(message));
             }
             return BadRequest("Failed to send message");
         }
 
-    [HttpGet]
-    public async Task<ActionResult<PageList<MessageDto>>> GetMessagesForUser([FromQuery]MessageParams messageParams)
-    {
+        [HttpGet]
+        public async Task<ActionResult<PageList<MessageDto>>> GetMessagesForUser([FromQuery] MessageParams messageParams)
+        {
             messageParams.Username = User.GetUsername();
             var messages = await _messageRepository.GetMessagesForUser(messageParams);
 
@@ -72,6 +72,13 @@ namespace DatingApp.Controllers
                 messages.TotalCount, messages.TotalPage));
 
             return messages;
-    }
+        }
+        [HttpGet("thread/{username}")]
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
+        {
+            var currentUsername = User.GetUsername();
+
+            return Ok(await _messageRepository.GetMessageThread(currentUsername, username));
+        }
     }
 }
