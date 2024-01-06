@@ -28,7 +28,7 @@ namespace DatingApp.Services.RepositoryService
             return await _dataContext.Messages.FindAsync(id);
         }
 
-        public Task<PageList<MessageDto>> GetMessagesForUser()
+        public Task<PageList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
         {
             throw new NotImplementedException();
         }
