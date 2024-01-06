@@ -18,11 +18,11 @@ export const routes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [authGuard],
         children: [
+            { path: 'messages', component: MessagesComponent },
             { path: 'members', component: MemberListComponent },
             { path: 'members/:username', component: MemberDetailComponent },
             { path: 'member/edit', component: MemberEditComponent, canDeactivate:[preventUnsavedChangesGuard] },
             { path: 'lists', component: ListComponent },
-            { path: 'messages', component: MessagesComponent },
         ]
     },
     { path: 'errors', component: TestErrorComponent},
