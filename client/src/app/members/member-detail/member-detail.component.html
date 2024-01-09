@@ -31,8 +31,8 @@
         </div>
     </div>
     <div class="col-8">
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li ngbNavItem >
+    <ul ngbNav #nav="ngbNav" class="nav-tabs" (activeIdChange)="onTabActivated(nav.activeId)">
+        <li ngbNavItem [ngbNavItem]="1">
           <button ngbNavLink>About {{member.knownAs}}</button>
           <ng-template ngbNavContent>
             <h4>Description</h4>
@@ -41,7 +41,7 @@
             <p>{{member.lookingFor}}</p>
           </ng-template>
         </li>
-        <li ngbNavItem>
+        <li ngbNavItem [ngbNavItem]="2">
           <button ngbNavLink>Interests</button>
           <ng-template ngbNavContent>
             <h4>Interests:</h4>
@@ -54,10 +54,10 @@
               <gallery  [items]="images" class="gallery"></gallery>
             </ng-template>
           </li>
-          <li ngbNavItem>
+          <li ngbNavItem [ngbNavItem]="4">
             <button ngbNavLink>Messages</button>
             <ng-template ngbNavContent>
-              <app-member-messages [usernamae]="member.userName"></app-member-messages>
+              <app-member-messages [messages]="messages" [username]="member.userName"></app-member-messages>
             </ng-template>
           </li>
       </ul>
