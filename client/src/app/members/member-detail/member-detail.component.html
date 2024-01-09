@@ -57,7 +57,7 @@
           <li ngbNavItem>
             <button ngbNavLink>Messages</button>
             <ng-template ngbNavContent>
-              <p>Messages wiil go here</p>
+              <app-member-messages [usernamae]="member.userName"></app-member-messages>
             </ng-template>
           </li>
       </ul>

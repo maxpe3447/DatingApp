@@ -6,12 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import {GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { TimeagoFormatter, TimeagoModule, TimeagoPipe } from 'ngx-timeago';
+import { MemberMessagesComponent } from "../member-messages/member-messages.component";
 @Component({
-  selector: 'app-member-detail',
-  standalone: true,
-  imports: [CommonModule, NgbNavModule, GalleryModule, TimeagoModule],
-  templateUrl: './member-detail.component.html',
-  styleUrl: './member-detail.component.css'
+    selector: 'app-member-detail',
+    standalone: true,
+    templateUrl: './member-detail.component.html',
+    styleUrl: './member-detail.component.css',
+    imports: [CommonModule, NgbNavModule, GalleryModule, TimeagoModule, MemberMessagesComponent]
 })
 export class MemberDetailComponent implements OnInit {
   member: Member | undefined;
