@@ -25,13 +25,13 @@
                 <div class="card-footer">
                     <div class="btn-group d-flex">
                         <button class="btn btn-primary">Like</button>
-                        <button class="btn btn-success">Messages</button>
+                        <button class="btn btn-success" (click)="selectTab(4)">Messages</button>
                     </div>
                 </div>
         </div>
     </div>
     <div class="col-8">
-    <ul ngbNav #nav="ngbNav" class="nav-tabs" (activeIdChange)="onTabActivated(nav.activeId)">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs" (activeIdChange)="onTabActivated(nav.activeId) ">
         <li ngbNavItem [ngbNavItem]="1">
           <button ngbNavLink>About {{member.knownAs}}</button>
           <ng-template ngbNavContent>

@@ -34,7 +34,8 @@
             <tr *ngFor="let message of messages"
                 routerLink="{{container === 'Outbox' 
                     ? '/member/' + message.recipientUsername 
-                    : '/members/'+message.senderUsername}}">
+                    : '/members/'+message.senderUsername}}"
+                    [queryParams]="{tab: 4}">
                 <td>{{message.content}}</td>
                 <td>
                     <div *ngIf="container === 'Outbox'">

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Member } from '../../model/member';
 import { MembersService } from '../../services/members.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNav, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { TimeagoModule } from 'ngx-timeago';
 import { MemberMessagesComponent } from "../member-messages/member-messages.component";
@@ -17,7 +17,7 @@ import { Message } from '../../model/message';
   imports: [CommonModule, NgbNavModule, GalleryModule, TimeagoModule, MemberMessagesComponent]
 })
 export class MemberDetailComponent implements OnInit {
-  // @ViewChild('memberTabs')memberTabs:
+  @ViewChild("ngbNav", {static: true}) ngbNav?: NgbNav;
   messages: Message[]  = [];
   member: Member | undefined;
   images: GalleryItem[] = [];
@@ -27,8 +27,15 @@ export class MemberDetailComponent implements OnInit {
     private messageService:MessageService) {
 
   }
+
   ngOnInit(): void {
     this.loadMember();
+
+    this.route.queryParams.subscribe({
+      next: params => {
+        params['tab'] && this.selectTab( parseInt(params['tab']))
+      }
+    })
   }
   loadMember() {
     var username = this.route.snapshot.paramMap.get('username');
@@ -59,5 +66,8 @@ export class MemberDetailComponent implements OnInit {
     for (const photo of this.member.photos) {
       this.images.push(new ImageItem({ src: photo.url, thumb: photo.url }));
     }
+  }
+  selectTab(id:number){
+    this.ngbNav?.select(id);
   }
 }
