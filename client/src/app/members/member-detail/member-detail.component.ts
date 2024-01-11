@@ -17,44 +17,38 @@ import { Message } from '../../model/message';
   imports: [CommonModule, NgbNavModule, GalleryModule, TimeagoModule, MemberMessagesComponent]
 })
 export class MemberDetailComponent implements OnInit {
-  @ViewChild("ngbNav", {static: true}) ngbNav?: NgbNav;
-  messages: Message[]  = [];
-  member: Member | undefined;
+  @ViewChild("ngbNav", { static: true }) ngbNav?: NgbNav;
+  messages: Message[] = [];
+  member: Member = {} as Member;
   images: GalleryItem[] = [];
   constructor(
     private memberService: MembersService,
     private route: ActivatedRoute,
-    private messageService:MessageService) {
+    private messageService: MessageService) {
 
   }
 
   ngOnInit(): void {
-    this.loadMember();
-
+    //this.loadMember();
+    this.route.data.subscribe({
+      next: data => this.member = data['member']
+    })
     this.route.queryParams.subscribe({
       next: params => {
-        params['tab'] && this.selectTab( parseInt(params['tab']))
+        params['tab'] && this.selectTab(parseInt(params['tab']))
       }
     })
+    this.getImages();
+
   }
-  loadMember() {
-    var username = this.route.snapshot.paramMap.get('username');
-    if (!username) return;
-    this.memberService.getMember(username).subscribe({
-      next: member => {
-        this.member = member
-        this.getImages();
-      }
-    });
-  }
-  onTabActivated(id:any){
-    if(id==4){
+  onTabActivated(id: any) {
+    if (id == 4) {
       this.loadMessage();
     }
   }
 
-  loadMessage(){
-    if(this.member){
+  loadMessage() {
+    if (this.member) {
       this.messageService.getMessageThread(this.member.userName).subscribe({
         next: messages => this.messages = messages
       })
@@ -67,7 +61,7 @@ export class MemberDetailComponent implements OnInit {
       this.images.push(new ImageItem({ src: photo.url, thumb: photo.url }));
     }
   }
-  selectTab(id:number){
+  selectTab(id: number) {
     this.ngbNav?.select(id);
   }
 }
