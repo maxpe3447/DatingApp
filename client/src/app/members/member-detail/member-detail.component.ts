@@ -17,7 +17,7 @@ import { Message } from '../../model/message';
   imports: [CommonModule, NgbNavModule, GalleryModule, TimeagoModule, MemberMessagesComponent]
 })
 export class MemberDetailComponent implements OnInit {
-  @ViewChild("ngbNav", { static: true }) ngbNav?: NgbNav;
+  @ViewChild("nav", { static: true }) ngbNav?: NgbNav;
   messages: Message[] = [];
   member: Member = {} as Member;
   images: GalleryItem[] = [];
@@ -29,12 +29,11 @@ export class MemberDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.loadMember();
     this.route.data.subscribe({
       next: data => this.member = data['member']
     })
     this.route.queryParams.subscribe({
-      next: params => {
+      next: params => {       
         params['tab'] && this.selectTab(parseInt(params['tab']))
       }
     })
