@@ -6,7 +6,7 @@ using DatingApp.Entities;
 using DatingApp.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace DatingApp.Services.RepositoryService
+namespace DatingApp.Services.MessageRepositoryService
 {
     public class MessageRepository : IMessageRepository
     {

@@ -3,7 +3,7 @@ using DatingApp.Entities;
 using DatingApp.Extensions;
 using DatingApp.Helpers;
 using DatingApp.Services.LikeRepository;
-using DatingApp.Services.Repository;
+using DatingApp.Services.UserRepositoryService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.Controllers

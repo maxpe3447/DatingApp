@@ -5,7 +5,7 @@ using DatingApp.Entities;
 using DatingApp.Extensions;
 using DatingApp.Helpers;
 using DatingApp.Services.PhotoService;
-using DatingApp.Services.Repository;
+using DatingApp.Services.UserRepositoryService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;

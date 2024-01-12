@@ -2,8 +2,8 @@
 using DatingApp.Helpers;
 using DatingApp.Services.LikeRepository;
 using DatingApp.Services.PhotoService;
-using DatingApp.Services.Repository;
-using DatingApp.Services.RepositoryService;
+using DatingApp.Services.UserRepositoryService;
+using DatingApp.Services.MessageRepositoryService;
 using DatingApp.Services.TokenService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

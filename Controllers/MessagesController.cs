@@ -4,8 +4,8 @@ using DatingApp.DTOs;
 using DatingApp.Entities;
 using DatingApp.Extensions;
 using DatingApp.Helpers;
-using DatingApp.Services.Repository;
-using DatingApp.Services.RepositoryService;
+using DatingApp.Services.UserRepositoryService;
+using DatingApp.Services.MessageRepositoryService;
 using Microsoft.AspNetCore.Mvc;
 using SQLitePCL;
 
