@@ -14,19 +14,19 @@ import { RouterLink, RouterModule } from '@angular/router';
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.css'
 })
-export class MessagesComponent implements OnInit{
+export class MessagesComponent implements OnInit {
   messages?: Message[];
   pagination?: Pagination;
   container = 'Unread';
   pageNumber = 1;
   pageSize = 5;
   loading = false;
-  constructor(private messageService:MessageService){}
+  constructor(private messageService: MessageService) { }
   ngOnInit(): void {
     this.loadMessages();
   }
 
-  loadMessages(){
+  loadMessages() {
     this.loading = true;
     this.messageService.getMessages(this.pageNumber, this.pageSize, this.container).subscribe({
       next: response => {
@@ -36,26 +36,33 @@ export class MessagesComponent implements OnInit{
       }
     });
   }
-  pageChanged(event:any){
-    if(this.pageNumber!==event){
+
+  deleteMessage(id: number) {
+    this.messageService.deleteMessage(id).subscribe({
+      next: () => this.messages?.splice(this.messages.findIndex(m => m.id === id), 1)
+    });
+  }
+
+  pageChanged(event: any) {
+    if (this.pageNumber !== event) {
       this.pageNumber = event;
       this.loadMessages();
     }
   }
 
-  unreadClick(){
+  unreadClick() {
     this.container = "Unread";
     this.loadMessages();
   }
-  inboxClick(){
+  inboxClick() {
     this.container = "Inbox";
     this.loadMessages();
   }
-  outboxClick(){
+  outboxClick() {
     this.container = "Outbox";
     this.loadMessages();
   }
-  pageChange(page:any){
+  pageChange(page: any) {
 
   }
 }
