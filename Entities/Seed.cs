@@ -24,11 +24,7 @@ public class Seed
 
         users.ForEach(user =>
         {
-            using var hmach = new HMACSHA512();
-
             user.UserName = user.UserName.ToLower();
-            user.PasswordHash = hmach.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
-            user.PasswordSalt = hmach.Key;
 
             context.Users.Add(user);
         });
