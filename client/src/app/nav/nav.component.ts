@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AccountService } from '../services/account.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router, RouterLink } from '@angular/router';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 import { HasRoleDirective } from '../_directives/has-role.directive';
 
 @Component({
@@ -21,8 +20,7 @@ export class NavComponent implements OnInit {
   ngOnInit(): void { }
 
   constructor(public accoutnService: AccountService,
-    private router: Router,
-    private toastr: ToastrService) { }
+              private router: Router) { }
 
   login() {
     this.accoutnService.login(this.model).subscribe({
@@ -33,5 +31,4 @@ export class NavComponent implements OnInit {
     this.accoutnService.logout();
     this.router.navigateByUrl('/');
   }
-
 }
