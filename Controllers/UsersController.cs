@@ -30,7 +30,7 @@ namespace DatingApp.Controllers
             _mapper = mapper;
             _photoService = photoService;
         }
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<PageList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -50,7 +50,7 @@ namespace DatingApp.Controllers
 
             return Ok(users);
         }
-
+        [Authorize(Roles = "Member")]
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {

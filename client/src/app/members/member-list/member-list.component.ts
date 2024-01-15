@@ -8,7 +8,7 @@ import { Pagination } from '../../model/pagination';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserParams } from '../../model/userParams';
 import { AccountService } from '../../services/account.service';
-import { User } from '../../model/User';
+import { User } from '../../model/user';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
