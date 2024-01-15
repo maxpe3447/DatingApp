@@ -30,7 +30,7 @@ namespace DatingApp.Controllers
             _mapper = mapper;
             _photoService = photoService;
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<PageList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {

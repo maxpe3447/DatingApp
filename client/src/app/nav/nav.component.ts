@@ -6,29 +6,30 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { HasRoleDirective } from '../_directives/has-role.directive';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgbDropdownModule, RouterLink,ToastrModule],
+  imports: [CommonModule, FormsModule, NgbDropdownModule, RouterLink, ToastrModule, HasRoleDirective],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
-export class NavComponent implements OnInit{
-  model: any={}
-  
-  ngOnInit(): void {}
+export class NavComponent implements OnInit {
+  model: any = {}
 
-  constructor(public accoutnService:AccountService, 
-              private router: Router,
-              private toastr: ToastrService){ }
+  ngOnInit(): void { }
 
-  login(){
+  constructor(public accoutnService: AccountService,
+    private router: Router,
+    private toastr: ToastrService) { }
+
+  login() {
     this.accoutnService.login(this.model).subscribe({
       next: _ => this.router.navigateByUrl('/members')
     });
   }
-  logout(){
+  logout() {
     this.accoutnService.logout();
     this.router.navigateByUrl('/');
   }
