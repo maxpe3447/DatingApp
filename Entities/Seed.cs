@@ -1,5 +1,6 @@
 ﻿using DatingApp.Data;
 using DatingApp.Data.Migrations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,9 +10,9 @@ namespace DatingApp.Entities;
 
 public class Seed
 {
-    public static async Task SeedUsers(DataContext context)
+    public static async Task SeedUsers(UserManager<AppUser> userManager)
     {
-        if (await context.Users.AnyAsync())
+        if (await userManager.Users.AnyAsync())
         {
             return;
         }
@@ -22,14 +23,11 @@ public class Seed
 
         var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 
-        users.ForEach(user =>
+        users.ForEach(async user =>
         {
             user.UserName = user.UserName.ToLower();
 
-            context.Users.Add(user);
+            await userManager.CreateAsync(user, "Pa$$w0rd");
         });
-
-        await context.SaveChangesAsync();
-
     }
 }
