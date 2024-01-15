@@ -1,10 +1,6 @@
-﻿using CloudinaryDotNet.Actions;
-using DatingApp.Data.Migrations;
-using DatingApp.Entities;
+﻿using DatingApp.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 
 namespace DatingApp.Data;
@@ -32,7 +28,7 @@ public class Seed
             new AppRole{Name = "Moderator"}
         };
 
-        foreach(var role in roles)
+        foreach (var role in roles)
         {
             await roleManager.CreateAsync(role);
         }
