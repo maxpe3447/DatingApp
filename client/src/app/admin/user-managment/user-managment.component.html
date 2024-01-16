@@ -1,1 +1,18 @@
-<p>user-managment works!</p>
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th  style="width: 30%;">Username</th>
+                <th  style="width: 40%;">Active Role</th>
+                <th  style="width: 30%;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.username}}</td>
+                <td>{{user.roles}}</td>
+                <td><button class="btn btn-info" (click)="openRolesModel(user)">Edit role</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

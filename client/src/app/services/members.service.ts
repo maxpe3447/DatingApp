@@ -6,7 +6,7 @@ import { map, of, take } from 'rxjs';
 import { PaginatedResult } from '../model/pagination';
 import { UserParams } from '../model/userParams';
 import { AccountService } from './account.service';
-import { User } from '../model/user';
+import { User } from '../model/User';
 import { PreloadingStrategy } from '@angular/router';
 import { getPaginationHeaders, getPaginationResult } from './paginationHepler';
 

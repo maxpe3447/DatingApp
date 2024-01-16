@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Member } from '../../model/member';
-import { User } from '../../model/user';
+import { User } from '../../model/User';
 import { AccountService } from '../../services/account.service';
 import { MembersService } from '../../services/members.service';
 import { take } from 'rxjs';

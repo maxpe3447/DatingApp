@@ -9,7 +9,7 @@
             </div>
           </ng-template>
         </li>
-        <li ngbNavItem [ngbNavItem]="2" >
+        <li *appHasRole="['Admin', 'Moderator']" ngbNavItem [ngbNavItem]="2" >
            <button ngbNavLink>Photo</button>
           <ng-template ngbNavContent  >
             <div class="container">
@@ -17,18 +17,11 @@
             </div>
           </ng-template>
         </li>
-        <li ngbNavItem [ngbNavItem]="3">
-            <!-- <button ngbNavLink>Photos</button>
+        <!-- <li ngbNavItem [ngbNavItem]="3">
+             <button ngbNavLink>Photos</button>
             <ng-template ngbNavContent *ngIf="nav.activeId == 3">
-              <gallery  [items]="images" class="gallery"></gallery>
-            </ng-template> -->
-          </li>
-          <li ngbNavItem [ngbNavItem]="4">
-            <!-- <button ngbNavLink>Messages</button>
-            <ng-template ngbNavContent>
-              <app-member-messages [messages]="messages" [username]="member.userName"></app-member-messages>
-            </ng-template> -->
-          </li>
+            </ng-template>
+          </li> -->
       </ul>
       <div [ngbNavOutlet]="nav"></div>
 </div>
