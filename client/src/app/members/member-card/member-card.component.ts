@@ -4,6 +4,7 @@ import { Member } from '../../model/member';
 import { RouterLink } from '@angular/router';
 import { MembersService } from '../../services/members.service';
 import { ToastrService } from 'ngx-toastr';
+import { PresenceService } from '../../services/presence.service';
 
 @Component({
   selector: 'app-member-card',
@@ -16,7 +17,8 @@ export class MemberCardsComponent {
  @Input() member:Member | undefined;
 
   constructor(private memberService:MembersService,
-              private toastr: ToastrService){}
+              private toastr: ToastrService,
+              public presenceService: PresenceService){}
 
   addLike(member: Member){
     this.memberService.addLike(member.userName).subscribe({

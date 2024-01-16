@@ -9,6 +9,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import { MemberMessagesComponent } from "../member-messages/member-messages.component";
 import { MessageService } from '../../services/message.service';
 import { Message } from '../../model/message';
+import { PresenceService } from '../../services/presence.service';
 @Component({
   selector: 'app-member-detail',
   standalone: true,
@@ -22,7 +23,7 @@ export class MemberDetailComponent implements OnInit {
   member: Member = {} as Member;
   images: GalleryItem[] = [];
   constructor(
-    private memberService: MembersService,
+    public presenceService: PresenceService,
     private route: ActivatedRoute,
     private messageService: MessageService) {
 
