@@ -3,7 +3,7 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { Member } from '../../model/member';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { environment } from '../../../environments/environment';
-import { User } from '../../model/User';
+import { User } from '../../model/user';
 import { AccountService } from '../../services/account.service';
 import { take } from 'rxjs';
 import { Photo } from '../../model/photo';

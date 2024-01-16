@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from '../../model/User';
+import { User } from '../../model/user';
 import { AdminService } from '../../services/admin.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RolesModalComponent } from '../../modals/roles-modal/roles-modal.component';

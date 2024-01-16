@@ -2,6 +2,7 @@ using DatingApp.Data;
 using DatingApp.Entities;
 using DatingApp.Extensions;
 using DatingApp.Middleware;
+using DatingApp.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -23,13 +24,14 @@ app.UseMiddleware<ExceptionMiddleware>();
 //Configure the HTTP request pipeline.
 app.UseCors(builder => builder.AllowAnyHeader()
                               .AllowAnyMethod()
+                              .AllowCredentials()
                               .WithOrigins("http://localhost:4200"));
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<PresenceHub>("hubs/presence");
 using var scope = app.Services.CreateScope();
 var service = scope.ServiceProvider;
 try

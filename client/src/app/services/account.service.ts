@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, UnsubscriptionError, map } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { User } from '../model/User';
+import { User } from '../model/user';
+import { PresenceService } from './presence.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,8 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private presenceService:PresenceService) { }
 
   login(model: any){
     return this.http.post<User>(this.baseUrl+'account/login', model).pipe(
@@ -41,11 +43,15 @@ export class AccountService {
     Array.isArray(roles)?user.roles = roles : user.roles.push(roles)
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+
+    this.presenceService.createHubConnection(user);
   }
 
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+
+    this.presenceService.stopHubConnection();
   }
 
   getDecodedToken(token:string){
