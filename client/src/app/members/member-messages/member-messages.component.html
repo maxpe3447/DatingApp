@@ -1,25 +1,25 @@
 <div class="card">
     <div class="card-body">
-        <div *ngIf="messages.length === 0">
+        <div *ngIf="(messageService.messageThread$|async)?.length ===0">
             No messages yet... say hi by using the messages box below
         </div>
-        <ul>
-            <li *ngFor="let message of messages">
+        <ul *ngIf="(messageService.messageThread$|async)!.length >0">
+            <li *ngFor="let message of (messageService.messageThread$ | async)">
                 <div>
                     <span class="chat-img float-end">
-                        <img class="rounded-circle" 
-                            src="{{message.senderPhotoUrl}}" 
-                            alt="image of user">
+                        <img class="rounded-circle" src="{{message.senderPhotoUrl}}" alt="image of user">
                     </span>
                     <div class="chat-body">
                         <div class="header">
                             <small class="text-muted">
-                                <span class="fa fa-clock-o">{{message.messageSent + 'Z' | timeago}}</span>
-                                <span class="text-danger" *ngIf="!message.dateRead && message.senderUsername!==username">
+                                <span class="bi bi-clock">{{message.messageSent + 'Z' | timeago}}</span>
+                                <span class="text-danger"
+                                    *ngIf="!message.dateRead && message.senderUsername!==username">
                                     (unread)
                                 </span>
-                                <span class="text-success" *ngIf="message.dateRead && message.senderUsername!==username">
-                                    (read {{message.dateRead + 'Z'}})
+                                <span class="text-success"
+                                    *ngIf="message.dateRead && message.senderUsername!==username">
+                                    (read {{message.dateRead + 'Z' | timeago}})
                                 </span>
                             </small>
                         </div>
@@ -32,13 +32,8 @@
     <div class="card-footer">
         <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
             <div class="input-group">
-                <input 
-                    type="text" 
-                    name="messageContent"
-                    required
-                    [(ngModel)]="messageContetn"
-                    class="form-control input-sm" 
-                    placeholder="Send a private message">
+                <input type="text" name="messageContent" required [(ngModel)]="messageContetn"
+                    class="form-control input-sm" placeholder="Send a private message">
                 <div class="input-group-apped">
                     <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
                 </div>

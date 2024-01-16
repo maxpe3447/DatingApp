@@ -32,6 +32,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 using var scope = app.Services.CreateScope();
 var service = scope.ServiceProvider;
 try
@@ -40,12 +41,13 @@ try
     var userManager = service.GetRequiredService<UserManager<AppUser>>();
     var roleManager = service.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
+    await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]");
     await Seed.SeedUsers(userManager, roleManager);
 }
 catch (Exception ex)
 {
     var logger = service.GetService<ILogger<Program>>();
-    logger.LogError(ex, "An error occureed during migration");
+    logger.LogError(ex, "An error occurred during migration");
 }
 
 app.Run();
