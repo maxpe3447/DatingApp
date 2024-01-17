@@ -40,6 +40,14 @@ namespace DatingApp.Services.MessageRepositoryService
             return await _dataContext.Connections.FindAsync(connectionId);
         }
 
+        public async Task<Group> GetGroupForConnection(string connectionId)
+        {
+            return await _dataContext.Groups
+                    .Include(x => x.Connections)
+                    .Where(x=> x.Connections.Any(c=>c.ConnectionId == connectionId))
+                    .FirstOrDefaultAsync();
+        }
+
         public async Task<Message> GetMessage(int id)
         {
             return await _dataContext.Messages.FindAsync(id);
