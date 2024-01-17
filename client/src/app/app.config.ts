@@ -1,5 +1,5 @@
 import { ApplicationConfig, Provider, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { RouteReuseStrategy, provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideToastr } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptor
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { loadingInterceptor } from './_interceptors/loading.interceptor';
+import { CustomRouteReuseStrategy } from './services/customRouteReuseStrategy';
 
 const noopInterceptorProvider: Provider =
 { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true };
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     noopInterceptorProvider,
     [provideHttpClient(withInterceptors([JwtInterceptor]))],
-    [provideHttpClient(withInterceptors([loadingInterceptor]))]
+    [provideHttpClient(withInterceptors([loadingInterceptor]))],
+    {provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy}
   ]
 };
