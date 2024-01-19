@@ -2,7 +2,7 @@
 using DatingApp.Entities;
 using DatingApp.Helpers;
 
-namespace DatingApp.Services.MessageRepositoryService
+namespace DatingApp.Services.MessageRepository
 {
     public interface IMessageRepository
     {

@@ -2,7 +2,7 @@
 using DatingApp.Entities;
 using DatingApp.Helpers;
 
-namespace DatingApp.Services.UserRepositoryService;
+namespace DatingApp.Services.UserRepository;
 
 public interface IUserRepository
 {

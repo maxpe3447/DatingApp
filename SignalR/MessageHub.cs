@@ -2,8 +2,8 @@
 using DatingApp.DTOs;
 using DatingApp.Entities;
 using DatingApp.Extensions;
-using DatingApp.Services.MessageRepositoryService;
-using DatingApp.Services.UserRepositoryService;
+using DatingApp.Services.MessageRepository;
+using DatingApp.Services.UserRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks.Dataflow;

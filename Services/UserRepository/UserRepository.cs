@@ -6,7 +6,7 @@ using DatingApp.Entities;
 using DatingApp.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace DatingApp.Services.UserRepositoryService;
+namespace DatingApp.Services.UserRepository;
 
 public class UserRepository : IUserRepository
 {

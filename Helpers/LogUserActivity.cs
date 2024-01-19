@@ -1,5 +1,5 @@
 ﻿using DatingApp.Extensions;
-using DatingApp.Services.UserRepositoryService;
+using DatingApp.Services.UserRepository;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace DatingApp.Helpers;
