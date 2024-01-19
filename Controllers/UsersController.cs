@@ -30,12 +30,12 @@ namespace DatingApp.Controllers
         public async Task<ActionResult<PageList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
 
-            var currentUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-            userParams.CurrentUsername = currentUser.UserName;
+            var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
+            userParams.CurrentUsername = User.GetUsername();
 
-            if (string.IsNullOrEmpty(currentUser.Gender))
+            if (string.IsNullOrEmpty(gender))
             {
-                userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
+                userParams.Gender = gender == "male" ? "female" : "male";
             }
 
             var users = await _unitOfWork.UserRepository.GetMemberAsync(userParams);
