@@ -1,4 +1,5 @@
 ﻿using DatingApp.Extensions;
+using DatingApp.Services.UnitOfWork;
 using DatingApp.Services.UserRepository;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -16,9 +17,9 @@ public class LogUserActivity : IAsyncActionFilter
         }
         var userId = resultContext.HttpContext.User.GetUserId();
 
-        var repo = resultContext.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
-        var user = await repo.GetByIdAsync(userId);
+        var uow = resultContext.HttpContext.RequestServices.GetRequiredService<IUnitOfWork>();
+        var user = await uow.UserRepository.GetByIdAsync(userId);
         user.LastActive = DateTime.UtcNow;
-        await repo.SaveAllAsync();
+        await uow.Complete();
     }
 }
