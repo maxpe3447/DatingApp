@@ -46,11 +46,16 @@ public class UserRepository : IUserRepository
             userParams.PageSize);
     }
 
-    public async Task<MemberDto> GetMemberAsync(string username)
+    public async Task<MemberDto> GetMemberAsync(string username, bool isCurrent)
     {
-        return await _context.Users.Where(x=>x.UserName == username)
-                                   .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                                   .SingleOrDefaultAsync();
+        var query = _context.Users.Where(x=>x.UserName == username)
+                                  .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                                  .AsQueryable();
+        if (isCurrent)
+        {
+            query = query.IgnoreQueryFilters();
+        }
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<AppUser> GetUserByUsernameAsync(string username)

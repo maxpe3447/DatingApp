@@ -49,7 +49,7 @@ namespace DatingApp.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _unitOfWork.UserRepository.GetMemberAsync(username);
+            return await _unitOfWork.UserRepository.GetMemberAsync(username, username == User.GetUsername());
         }
 
         [HttpPut()]
