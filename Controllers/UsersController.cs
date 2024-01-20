@@ -69,7 +69,7 @@ namespace DatingApp.Controllers
                 return NoContent();
             }
 
-            return BadRequest("Faild to update user");
+            return BadRequest("Failed to update user");
         }
 
         [HttpPost("add-photo")]
@@ -94,11 +94,6 @@ namespace DatingApp.Controllers
                 Url = result.SecureUri.AbsoluteUri,
                 PublicId = result.PublicId
             };
-
-            if (user.Photos.Count == 0)
-            {
-                photo.IsMain = true;
-            }
 
             user.Photos.Add(photo);
 
