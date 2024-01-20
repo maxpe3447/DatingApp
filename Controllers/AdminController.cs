@@ -1,4 +1,6 @@
 ﻿using DatingApp.Entities;
+using DatingApp.Services.PhotoService;
+using DatingApp.Services.UnitOfWork;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +12,16 @@ namespace DatingApp.Controllers
     public class AdminController :BaseApiController
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IPhotoService _photoService;
 
-        public AdminController(UserManager<AppUser> userManager)
+        public AdminController(UserManager<AppUser> userManager,
+                               IUnitOfWork unitOfWork, 
+                               IPhotoService photoService)
         {
             _userManager = userManager;
+            _unitOfWork = unitOfWork;
+            _photoService = photoService;
         }
 
         [Authorize(Policy = "RequireAdminRole")]
@@ -72,7 +80,41 @@ namespace DatingApp.Controllers
         [HttpGet("photo-to-moderate")]
         public ActionResult GetPhotosForModeration()
         {
-            return Ok("Admins or moderators can see this");
+            return Ok(_unitOfWork.PhotoRepository.GetUnapprovedPhoto());
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("approve-photo/{photoId}")]
+        public async Task<ActionResult> ApprovePhoto(int photoId)
+        {
+            (await _unitOfWork.PhotoRepository.GetPhotoById(photoId)).IsApproved = true;
+
+            await _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("reject-photo/{photoId}")]
+        public async Task<ActionResult> RejectPhoto(int photoId)
+        {
+            var photo = await _unitOfWork.PhotoRepository.GetPhotoById(photoId);
+            if (photo.PublicId != null)
+            {
+                var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+
+                if(result.Result == "ok")
+                {
+                    _unitOfWork.PhotoRepository.RemovedPhoto(photo);
+                }
+            }
+            else
+            {
+                _unitOfWork.PhotoRepository.RemovedPhoto(photo);
+            }
+            await _unitOfWork.Complete();
+
+            return Ok();
         }
     }
 }
