@@ -2,6 +2,7 @@ import { Component, OnInit, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService } from '../../services/admin.service';
 import { Photo } from '../../model/photo';
+import { map, take } from 'rxjs';
 
 @Component({
   selector: 'app-photo-managment',
@@ -16,12 +17,12 @@ export class PhotoManagmentComponent implements OnInit{
 
   constructor(private adminService:AdminService){}
   ngOnInit(): void {
-    this.getPhotosForApproval();
+    this.getPhotosForApproval();    
   }
 
   getPhotosForApproval(){
     this.adminService.getPhotoForApproval().subscribe({
-      next: photos=> this.photos = photos
+      next: photos => this.photos = photos
     })
   }
 

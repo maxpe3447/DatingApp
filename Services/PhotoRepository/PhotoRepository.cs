@@ -16,7 +16,7 @@ namespace DatingApp.Services.PhotoRepository
         public async Task<Photo> GetPhotoById(int id)
         {
             return await _dataContext.Photos.IgnoreQueryFilters()
-                                            .SingleOrDefaultAsync();
+                                            .SingleOrDefaultAsync(x=> x.Id == id);
         }
 
         public async Task<IEnumerable<PhotoForApprovalDto>> GetUnapprovedPhoto()

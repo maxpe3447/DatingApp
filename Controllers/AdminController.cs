@@ -77,10 +77,10 @@ namespace DatingApp.Controllers
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]
-        [HttpGet("photo-to-moderate")]
-        public ActionResult GetPhotosForModeration()
+        [HttpGet("photos-to-moderate")]
+        public async Task<ActionResult> GetPhotosForModeration()
         {
-            return Ok(_unitOfWork.PhotoRepository.GetUnapprovedPhoto());
+            return Ok(await _unitOfWork.PhotoRepository.GetUnapprovedPhoto());
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]

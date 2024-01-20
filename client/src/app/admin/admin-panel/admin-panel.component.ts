@@ -6,6 +6,7 @@ import { UserManagmentComponent } from "../user-managment/user-managment.compone
 import { PhotoEditorComponent } from "../../members/photo-editor/photo-editor.component";
 import { AccountService } from '../../services/account.service';
 import { AdminService } from '../../services/admin.service';
+import { PhotoManagmentComponent } from '../photo-managment/photo-managment.component';
 
 @Component({
   schemas: [NO_ERRORS_SCHEMA],
@@ -13,7 +14,7 @@ import { AdminService } from '../../services/admin.service';
   standalone: true,
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css',
-  imports: [CommonModule, NgbNavModule, UserManagmentComponent, PhotoEditorComponent, HasRoleDirective]
+  imports: [CommonModule, NgbNavModule, UserManagmentComponent, PhotoEditorComponent, HasRoleDirective, PhotoManagmentComponent]
 })
 export class AdminPanelComponent{
   constructor(){ }

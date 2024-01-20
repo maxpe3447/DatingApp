@@ -17,11 +17,14 @@
             </div>
           </ng-template>
         </li>
-        <!-- <li ngbNavItem [ngbNavItem]="3">
-             <button ngbNavLink>Photos</button>
+        <li ngbNavItem [ngbNavItem]="3">
+             <button ngbNavLink>Photo menegment</button>
             <ng-template ngbNavContent *ngIf="nav.activeId == 3">
+              <div class="container">
+                <app-photo-managment></app-photo-managment>
+              </div>
             </ng-template>
-          </li> -->
+          </li>
       </ul>
       <div [ngbNavOutlet]="nav"></div>
 </div>
