@@ -2,6 +2,7 @@
 using DatingApp.Data;
 using DatingApp.Services.LikeRepository;
 using DatingApp.Services.MessageRepository;
+using DatingApp.Services.PhotoRepository;
 using DatingApp.Services.UserRepository;
 
 namespace DatingApp.Services.UnitOfWork
@@ -22,6 +23,8 @@ namespace DatingApp.Services.UnitOfWork
         public IMessageRepository MessageRepository => new MessageRepository.MessageRepository(_dataContext, _mapper);
 
         public ILikeRepository LikeRepository => new LikeRepository.LikeRepository(_dataContext);
+
+        public IPhotoRepository PhotoRepository => new PhotoRepository.PhotoRepository(_dataContext);
 
         public async Task<bool> Complete()
         {
