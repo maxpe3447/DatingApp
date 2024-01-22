@@ -1,3 +1,4 @@
+using DatingApp.Controllers;
 using DatingApp.Data;
 using DatingApp.Entities;
 using DatingApp.Extensions;
@@ -5,9 +6,10 @@ using DatingApp.Middleware;
 using DatingApp.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using System.Text.Json.Serialization;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions { WebRootPath = "wwwroot/browser" });
 
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -36,6 +38,7 @@ app.UseStaticFiles();
 app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
+app.MapFallbackToController(nameof(FallBackController.Index), nameof(FallBackController).Replace("Controller", ""));
 using var scope = app.Services.CreateScope();
 var service = scope.ServiceProvider;
 try
